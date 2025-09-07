@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>lustrous</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- 再生開始ヒント -->
+<p id="message">🎵 右下のプレイヤーをクリックすると再生が始まります</p>
+<div id="dummy"></div>
+<!-- オーバーレイ / Overlay -->
+<div id="overlay">
+  <p><span class="far">▶</span>now loading...</p>
+</div>
+
+<!-- ヘッダ / Header -->
+<div id="header">
+  <!-- 再生コントロール / Playback control -->
+  <div id="control" class="far">
+    <a href="#" id="play" class="disabled">▶</a>
+    <a href="#" id="stop" class="disabled">⏹</a>
+  </div>
+  <!-- アーティストと楽曲の情報 / Artist and song info -->
+  <div id="meta">
+    <div id="artist">artist: <span>-</span></div>
+    <div id="song">song: <span>-</span></div>
+  </div>
+</div>
+
+<!-- 音源 / Audio souce -->
+<div id="media"></div>
+
+<!-- 歌詞 / Lyrics text -->
+<div id="lyrics">
+  <!-- 文字 / Text -->
+  <div id="text"></div>
+  <!-- ビートバー / Beat bar -->
+  <div id="bar">
+    
+  </div>
+  <!-- ▼ 波形キャンバス（ビートに合わせて描画） -->
+    <canvas id="wave"></canvas>
+</div>
+
+<!-- シークバー -->
+<div id="seekbar">
+  <div></div>
+</div>
+
+
+
+<!-- TextAlive（CodePenなら Settings → JS で追加してOK） -->
+<!-- <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script> -->
+
+<!-- あなたのアプリ用スクリプト -->
+<script src="./index.js"></script>
+<!-- partial -->
+  <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+<script src='https://unpkg.com/textalive-app-api/dist/index.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
