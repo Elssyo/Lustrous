@@ -7,6 +7,9 @@ const textContainer = document.querySelector("#text");
 const seekbar = document.querySelector("#seekbar");
 const paintedSeekbar = seekbar.querySelector("div");
 const msg = document.getElementById("message");
+// 「輝いて」を出現順で 7 色ローテーション
+const RAINBOW_LEN = 7;
+let kagayaiteCount = -1;  // 最初は -1、最初の出現で 0 に
 
 /* =========================
    TextAlive 初期化
@@ -79,6 +82,7 @@ player.addListener({
     document.querySelector("#control > a#stop").className = "";
   },
 
+  
   /* 再生位置の情報が更新されたら呼ばれる */
   onTimeUpdate(position) {
     try {
@@ -209,9 +213,25 @@ seekbar.addEventListener("click", (e) => {
  * 新しい文字の発声時に呼ばれる
  * Called when a new character is being vocalized
 ========================= */
+
+function markKagayaiRun(startChar) {
+  const a = startChar;
+  const b = a?.next || null;
+  const c = b?.next || null;
+  const s = (a?.text || "") + (b?.text || "") + (c?.text || "");
+  if (s === "輝いて") {
+    kagayaiteCount = (kagayaiteCount + 1) % RAINBOW_LEN;
+    const idx = kagayaiteCount;
+    if (a) a.__kColorIndex = idx;
+    if (b) b.__kColorIndex = idx;
+    if (c) c.__kColorIndex = idx;
+    return true;
+  }
+  return false;
+}
+
 function newChar(current) {
-  // 品詞 (part-of-speech)
-  // https://developer.textalive.jp/packages/textalive-app-api/interfaces/iword.html#pos
+  // 品詞…
   const classes = [];
   if (
     current.parent.pos === "N" ||
@@ -233,6 +253,15 @@ function newChar(current) {
     } else if (current.parent.firstChar === current) {
       classes.push("firstCharInEnglishWord");
     }
+  }
+
+  // === 追加：「輝いて」を3文字連続で検出し、3文字すべてに同じレインボーインデックスを付与する ===
+  if (current.__kColorIndex == null) {
+   // まだマークされていない場合のみ、現在の文字から検出を試みる
+    markKagayaiRun(current);
+  }
+  if (current.__kColorIndex != null) {
+    classes.push("kagayai", `kagayai-${current.__kColorIndex}`);
   }
 
   // noun, lastChar クラスを必要に応じて追加

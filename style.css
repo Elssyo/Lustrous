@@ -247,6 +247,27 @@ body {
   font-weight: bold;
 }
 
+/* 「輝いて」用のレインボー強調（拡大 + 発光） */
+#text .kagayai {
+  font-size: 1.35em;                 /* 放大 */
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: transform .2s ease, text-shadow .2s ease;
+}
+#text .kagayai:hover {                
+  transform: scale(1.50);
+}
+
+/* 赤→橙→黄→緑→青→藍→紫 の順に割り当て */
+#text .kagayai-0 { color: #ff4d4f !important; text-shadow: 0 0 8px rgba(255,77,79,.6); }
+#text .kagayai-1 { color: #ff7a45 !important; text-shadow: 0 0 8px rgba(255,122,69,.6); }
+#text .kagayai-2 { color: #fadb14 !important; text-shadow: 0 0 8px rgba(250,219,20,.6); }
+#text .kagayai-3 { color: #52c41a !important; text-shadow: 0 0 8px rgba(82,196,26,.6); }
+#text .kagayai-4 { color: #13c2c2 !important; text-shadow: 0 0 8px rgba(19,194,194,.6); }
+#text .kagayai-5 { color: #1677ff !important; text-shadow: 0 0 8px rgba(22,119,255,.6); }
+#text .kagayai-6 { color: #722ed1 !important; text-shadow: 0 0 8px rgba(114,46,209,.6); }
+
+
 /**
  * フレーズ終わりで右にマージンを空けて読みやすくする
  * Add right margin to the last char in phrases
